@@ -5,12 +5,11 @@
 #include <stdlib.h> 
 #include <errno.h>
 #include <string.h>
+
 int main(int argc, char* argv[]){
 	
-	printf("_______________\n");		
 	bool append = false;  		
 	char opt;
-	printf("RUNNING TEE\n");
 	printf("%d\n",argc); 
 	while((opt = getopt(argc,argv,"a:")) != -1){
 		switch(opt){
@@ -57,6 +56,11 @@ int main(int argc, char* argv[]){
 				return -1; 	
 			}
 		}
+		
+		int status = close(writeFile);
+		if(status == -1){
+			fprintf(stderr,"Error closeing %s: %s ",fileName,strerror(errno));
+		}		
 	}
 	else{
 		int writeFile = open(fileName,O_WRONLY);	
@@ -74,6 +78,10 @@ int main(int argc, char* argv[]){
 					fileName,strerror(errno));
 				return -1; 	
 			}
+		}
+		int status = close(writeFile);
+		if(status == -1){
+			fprintf(stderr,"Error closeing %s: %s ",fileName,strerror(errno));
 		}
 	}
 	

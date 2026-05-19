@@ -4,6 +4,7 @@
 #include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
+
 const char *DATA_PATH = "./data/existing_file.txt";
 
 int main(){

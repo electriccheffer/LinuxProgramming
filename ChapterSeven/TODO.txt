@@ -1,0 +1,4 @@
++ Create the header structure 
++ Create the malloc function 
+	- use a static instance of a header structure set to null
++ Create the free function 

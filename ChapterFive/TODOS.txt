@@ -1,0 +1,2 @@
+Goal: Write an application for examining a process and all the files, sockets, and pipes that
+      it has open. 	

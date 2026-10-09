@@ -10,7 +10,6 @@ void *malloc(size_t size){
 	size_t increment = header_size + size; 
 	if(heap_start == NULL){
 		
-		
 		void *block_address = sbrk(increment);
 		if(block_address == (void*)-1){
 			return NULL; 
@@ -53,4 +52,29 @@ void *malloc(size_t size){
 		void *start_address = (char*)block_address + header_size; 	
 		return start_address;  
 	}
+}
+
+void free(void *ptr){
+	
+	if(heap_start == NULL || ptr == NULL){
+		return;
+	}
+
+	size_t header_size = sizeof(MemoryBlock); 
+	void  *block_address = (char *)ptr - header_size; 
+		
+	MemoryBlock *current_node = heap_start; 
+	while(current_node->next != NULL){
+		
+		if(current_node == block_address){
+			current_node->free = 1; 	
+			return; 
+		}
+		current_node = current_node->next; 		
+	}
+	if(current_node == block_address){
+		current_node->free = 1; 
+		return; 
+	}
+	return; 	
 }
